@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
 require "identify_it/version"
@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.description = "Add Identifier handling to the AR models."
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile",
+                "README.md"]
 
   s.add_dependency "rails", "~> 5.1.5"
 

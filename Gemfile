@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 # Declare your gem's dependencies in identify_it.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -11,4 +11,5 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-gem 'byebug', group: [:development, :test]
+gem "byebug", group: %i[development test]
+gem "rubocop", group: %i[development test]

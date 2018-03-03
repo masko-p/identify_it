@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 module IdentifyIt
   class Generator
-    UPPERCASE    = ('A'..'Z')
-    LOWERCASE    = ('a'..'z')
-    NUMBERS      = ('0'..'9')
+    UPPERCASE    = ("A".."Z")
+    LOWERCASE    = ("a".."z")
+    NUMBERS      = ("0".."9")
 
     attr_reader :alphabet, :set_case, :alphaset, :identifier_format
     # format: '{4}:{4}'
@@ -16,8 +17,8 @@ module IdentifyIt
     #                   :lower
     #                   :mix
 
-    def initialize(format, options = {})
-      @identifier_format   = format
+    def initialize(format, options={})
+      @identifier_format = format
       @alphabet = options[:alphabet] || :letters
       @set_case = options[:case] || :upper
       generate_set
@@ -26,18 +27,18 @@ module IdentifyIt
     def get
       identifier = identifier_format.dup
       identifier_set = alphaset.sample(length)
-      literals = get_literal_sizes.map{ |size| identifier_set.shift(size).join }
-      literals.each{ |literal| identifier.sub!(/(\{\d+\})/, literal) }
+      literals = literal_sizes.map {|size| identifier_set.shift(size).join }
+      literals.each {|literal| identifier.sub!(/(\{\d+\})/, literal) }
       identifier
     end
 
     private
 
     def length
-      get_literal_sizes.sum
+      literal_sizes.sum
     end
 
-    def get_literal_sizes
+    def literal_sizes
       identifier_format.scan(/\{(\d+)\}/).flatten.map(&:to_i)
     end
 
@@ -50,16 +51,15 @@ module IdentifyIt
     end
 
     def add_upper_letters?
-      [:letters, :mix].include?(alphabet) && [:upper, :mix].include?(set_case)
+      %i[letters mix].include?(alphabet) && %i[upper mix].include?(set_case)
     end
 
     def add_lower_letters?
-      [:letters, :mix].include?(alphabet) && [:lower, :mix].include?(set_case)
+      %i[letters mix].include?(alphabet) && %i[lower mix].include?(set_case)
     end
 
     def add_numbers?
-      [:numbers, :mix].include?(alphabet)
+      %i[numbers mix].include?(alphabet)
     end
-
   end
 end

@@ -1,22 +1,22 @@
-require 'identify_it/generator'
+require "identify_it/generator"
 
 module IdentifyIt
   module HasIdentifier
     module ClassMethods
-      def has_identifier(format, options = {})
+      def has_identifier(format, options={})
         @identifier_generator = IdentifyIt::Generator.new(format, options)
-        self.define_singleton_method(:identifier_generator) {@identifier_generator}
+        define_singleton_method(:identifier_generator) { @identifier_generator }
 
         validates :identifier, presence: true, uniqueness: true
         before_validation :set_unique_identifier, on: :create
 
-        self.send(:include, InstanceMethods)
+        send(:include, InstanceMethods)
       end
     end
 
     module InstanceMethods
-
       private
+
       def identifier=(val)
         super(val)
       end
@@ -29,6 +29,6 @@ module IdentifyIt
         end
       end
     end
-    ActiveRecord::Base.send(:extend,  ClassMethods)
+    ActiveRecord::Base.send(:extend, ClassMethods)
   end
 end
