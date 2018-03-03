@@ -9,9 +9,8 @@ Gem::Specification.new do |s|
   s.version     = IdentifyIt::VERSION
   s.authors     = ["Pavlo Masko"]
   s.email       = ["masko.pavlo@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of IdentifyIt."
-  s.description = "TODO: Description of IdentifyIt."
+  s.summary     = "Add Identifier handling to the AR models."
+  s.description = "Add Identifier handling to the AR models."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
